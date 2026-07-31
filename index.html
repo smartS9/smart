@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My First Design</title>
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f4f4;
+    padding:20px;
+}
+.container{
+	
+    max-width:1000px;
+    background:Green;
+    padding:50px;
+    margin:auto;
+    border-radius:30px;
+}
+button{
+    padding:10px 15px;
+    margin-top:15px;
+    cursor:pointer;
+}
+.option{
+    margin:8px 0;
+}
+</style>
+</head>
+<body>
+
+
+<div class="container">
+    <h2>Emma's CBT Test</h2>
+    <div id="quiz"></div>
+    <button onclick="nextQuestion()">Next</button>
+
+
+    <h3 id="result"></h3>
+</div>
+
+<script>
+const questions = [
+{
+q:"1. HTML stands for?",
+options:["Hyper Text Markup Language","HighText Machine","Home Tool Markup","Hyperlinks Text"],
+answer:0
+},
+{
+q:"2. JavaScript is used for?",
+options:["Styling","Database","Interactivity","Hosting"],
+answer:2
+},
+{
+q:"3. CSS means?",
+options:["Creative Style Sheets","Cascading Style Sheets","Computer Style","Colorful Style"],
+answer:1
+},
+{
+q:"4. Which tag creates a paragraph?",
+options:["p","h1","div","a"],
+answer:0
+},
+{
+q:"5. Which symbol is used for comments in JavaScript?",
+options:["//","<!-- -->","##","**"],
+answer:0
+},
+{
+q:"6. Which method prints to console?",
+options:["print()","write()","console.log()","display()"],
+answer:2
+},
+{
+q:"7. Which keyword declares variable?",
+options:["var","int","string","define"],
+answer:0
+},
+{
+q:"8. Which HTML tag inserts image?",
+options:["img","image","pic","src"],
+answer:0
+},
+{
+q:"9. JavaScript file extension?",
+options:[".java",".js",".json",".html"],
+answer:1
+},
+{
+q:"10. CSS is used for?",
+options:["Logic","Styling","Database","Networking"],
+answer:1
+}
+];
+
+let current = 0;
+let score = 0;
+
+function loadQuestion(){
+    const q = questions[current];
+    let html = `<h3>${q.q}</h3>`;
+
+    q.options.forEach((opt,index)=>{
+        html += `
+        <div class="option">
+            <input type="radio" name="answer" value="${index}">
+            ${opt}
+        </div>`;
+    });
+
+    document.getElementById("quiz").innerHTML = html;
+}
+
+function nextQuestion(){
+    const selected = document.querySelector('input[name="answer"]:checked');
+
+
+
+
+    if(selected){
+        if(Number(selected.value) === questions[current].answer){
+            score++;
+        }
+    }
+
+    current++;
+
+    if(current < questions.length){
+        loadQuestion();
+    } else {
+        document.getElementById("quiz").innerHTML = "";
+        document.getElementById("result").innerHTML =
+        `Test Completed! Score: ${score} / ${questions.length}`;
+    }
+}
+
+loadQuestion();
+</script>
+<img scr="WIN_20260730_15_34_09_Pro></img>
+
+</body>
+</html>
